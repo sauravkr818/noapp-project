@@ -91,11 +91,13 @@ function Dashboard() {
                             )
                             .then(function (response) {
                                 setTableData([...response.data.data]);
+                                setLoadingTable(false);
                             })
                             .catch(function (error) {
                                 console.log(error);
+                                setLoadingTable(false);
                             });
-                        setLoadingTable(false);
+                        
                         toast.info(`File Uploaded Succesfully`, {
                             position: "top-right",
                             autoClose: 5000,
@@ -106,6 +108,7 @@ function Dashboard() {
                             progress: undefined,
                             theme: "colored",
                         });
+                        setLoading(false);
                     })
                     .catch((error) => {
                         console.log(error);
@@ -119,9 +122,10 @@ function Dashboard() {
                             progress: undefined,
                             theme: "colored",
                         });
+                        setLoading(false);
                     });
 
-                setLoading(false);
+                
             };
             reader.readAsArrayBuffer(file);
         });

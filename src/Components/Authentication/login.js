@@ -3,6 +3,7 @@ import { useNavigate, useLocation, Link } from "react-router-dom";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import Header from "../Global/header";
+import SyncLoader from "react-spinners/SyncLoader";
 
 import { ToastContainer, toast } from "react-toastify";
 
@@ -12,6 +13,7 @@ function Login() {
     let navigate = useNavigate();
 
     let { state } = useLocation();
+    const [isLoading, setIsLoading] = useState(false);
 
     const [loginData, setLoginData] = useState({
         email: "",
@@ -34,8 +36,8 @@ function Login() {
                 draggable: true,
                 progress: undefined,
                 theme: "colored",
-                });
-                count++;
+            });
+            count++;
         }
         let token = localStorage.getItem("token");
 
@@ -58,16 +60,21 @@ function Login() {
     }, []);
 
     const handleSubmit = () => {
+        setIsLoading(true);
         axios
-            .post("https://east-economic-raccoon.glitch.me/api/controller/login", {
-                email: loginData.email,
-                password: loginData.password,
-            })
+            .post(
+                "https://east-economic-raccoon.glitch.me/api/controller/login",
+                {
+                    email: loginData.email,
+                    password: loginData.password,
+                }
+            )
             .then(function (response) {
                 localStorage.setItem("token", response.data.token);
                 navigate("/dashboard", {
                     state: { message: "Successfully logged in" },
                 });
+                setIsLoading(false);
             })
             .catch(function (error) {
                 toast.error(error.response.data.err, {
@@ -81,6 +88,7 @@ function Login() {
                     theme: "colored",
                 });
                 console.log(error);
+                setIsLoading(false);
             });
     };
 
@@ -155,6 +163,19 @@ function Login() {
                                                     Login
                                                 </button>
                                             </div>
+                                            {isLoading ? (
+                                                    <div className="d-flex justify-content-center">
+                                                        <SyncLoader
+                                                            color={"#36d7b7"}
+                                                            loading={true}
+                                                            size={20}
+                                                            aria-label="Loading Spinner"
+                                                            data-testid="loader"
+                                                        />
+                                                    </div>
+                                                ) : (
+                                                    <></>
+                                                )}
                                             <div className="d-md-flex justify-content-md-center">
                                                 <span>
                                                     Don't have an account?{" "}

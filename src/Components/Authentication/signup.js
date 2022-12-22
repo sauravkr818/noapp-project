@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import Header from "../Global/header";
-
+import SyncLoader from "react-spinners/SyncLoader";
 import { ToastContainer, toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 
 function Signup() {
     let navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
     const [details, setDetails] = useState({
         email: "",
         password: "",
@@ -20,6 +21,7 @@ function Signup() {
     };
 
     const handleSubmit = (e) => {
+        setIsLoading(true);
         axios
             .post(
                 "http://localhost:5000/api/controller/signup",
@@ -30,6 +32,7 @@ function Signup() {
                 }
             )
             .then(function (response) {
+                setIsLoading(false);
                 navigate("/login", {
                     state: { message: "Successfully Signed Up" },
                 });
@@ -37,6 +40,7 @@ function Signup() {
             .catch(function (error) {
                 toast.error(error.response.data.err);
                 console.log(error);
+                setIsLoading(false);
             });
     };
 
@@ -134,6 +138,19 @@ function Signup() {
                                                     Sign Up
                                                 </button>
                                             </div>
+                                            {isLoading ? (
+                                                    <div className="d-flex justify-content-center">
+                                                        <SyncLoader
+                                                            color={"#36d7b7"}
+                                                            loading={true}
+                                                            size={20}
+                                                            aria-label="Loading Spinner"
+                                                            data-testid="loader"
+                                                        />
+                                                    </div>
+                                                ) : (
+                                                    <></>
+                                                )}
                                             <div className="d-flex justify-content-center">
                                                 <span>
                                                     Already have an account?{" "}
