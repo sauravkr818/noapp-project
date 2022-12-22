@@ -24,7 +24,7 @@ function Signup() {
         setIsLoading(true);
         axios
             .post(
-                "http://localhost:5000/api/controller/signup",
+                "https://east-economic-raccoon.glitch.me/api/controller/signup",
                 {
                     email: details.email,
                     password: details.password,
