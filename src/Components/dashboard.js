@@ -226,12 +226,11 @@ function Dashboard() {
                     <div className="row d-flex justify-content-center">
                         <div className="col-lg-6 col-10 mb-5">
                             <label className="formbold-form-label formbold-form-label-2 ms-2">
-                                Upload CSV File 
-                            </label>
-
-<button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Upload CSV File <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Format
 </button>
+                            </label>
+
 
                             <div {...getRootProps({ style })} className="hoverUpload">
                                 <input {...getInputProps()} />
@@ -315,13 +314,36 @@ function Dashboard() {
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Format of CSV file</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
+< div className="table-responsive">
+        <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">name</th>
+      <th scope="col">email</th>
+      <th scope="col">phone</th>
+      <th scope="col">linkedIn</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+     
+      <td>Mark</td>
+      <td>Mark@gmail.com</td>
+      <td>1234567890</td>
+      <td>https://www.linked.com</td>
+    </tr>
+   
+   
+  </tbody>
+</table>
+</div>
       </div>
       <div class="modal-footer">
+<p>Please keep the format as it is shown above</p>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
