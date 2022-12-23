@@ -226,9 +226,7 @@ function Dashboard() {
                     <div className="row d-flex justify-content-center">
                         <div className="col-lg-6 col-10 mb-5">
                             <label className="formbold-form-label formbold-form-label-2 ms-2">
-                                Upload CSV File <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Format
-</button>
+                                Upload CSV File
                             </label>
 
 
@@ -256,7 +254,9 @@ function Dashboard() {
                     )}
                     <aside>
                         <h5 className="formbold-form-label formbold-form-label-2">Accepted files</h5>
-                        <ul>{acceptedFileItems}</ul>
+                        <ul>{acceptedFileItems} <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  (Format)
+</button> </ul>
                     </aside>
                     <h4 className="mt-5 formbold-form-label formbold-form-label-2">Data: </h4>
                     <div class="table-responsive">
