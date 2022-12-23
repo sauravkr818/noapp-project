@@ -45,7 +45,7 @@ function Dashboard() {
     const [loading, setLoading] = useState(false);
 
     const [tableData, setTableData] = useState([]);
-    const [loadingTable, setLoadingTable] = useState(false);
+    const [loadingTable, setLoadingTable] = useState(true);
 
     const [navDetails, setNavDetails] = useState({
         email: "",
@@ -182,13 +182,13 @@ function Dashboard() {
                     }
                 )
                 .then(function (response) {
-                    setTableData([...response.data.data]);
+                    setTableData([...response.data.data]);setLoadingTable(false);
                 })
                 .catch(function (error) {
-                    console.log(error);
+                    console.log(error);setLoadingTable(false);
                 });
 
-            setLoadingTable(false);
+            
 
             var exp = decoded.exp * 1000;
 
