@@ -226,8 +226,13 @@ function Dashboard() {
                     <div className="row d-flex justify-content-center">
                         <div className="col-lg-6 col-10 mb-5">
                             <label className="formbold-form-label formbold-form-label-2 ms-2">
-                                Upload CSV File
+                                Upload CSV File 
                             </label>
+
+<button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Format
+</button>
+
                             <div {...getRootProps({ style })} className="hoverUpload">
                                 <input {...getInputProps()} />
                                 <p>
@@ -237,7 +242,7 @@ function Dashboard() {
                             </div>
                         </div>
                     </div>
-                    {loading ? (
+                    {loadingTable ? (
                         <div className="">
                             <SyncLoader
                                 color={"#36d7b7"}
@@ -305,6 +310,24 @@ function Dashboard() {
                         </table>
                     </div>
                 </div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
             </>
         );
     } else {
