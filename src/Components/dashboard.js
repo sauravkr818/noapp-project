@@ -253,10 +253,12 @@ function Dashboard() {
                         <></>
                     )}
                     <aside>
+<div className="d-flex justify-content-center">
                         <h5 className="formbold-form-label formbold-form-label-2">Accepted files</h5>
-                        <ul>{acceptedFileItems} <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
   (Format)
-</button> </ul>
+</button></div>                     
+<ul>{acceptedFileItems} </ul>
                     </aside>
                     <h4 className="mt-5 formbold-form-label formbold-form-label-2">Data: </h4>
                     <div class="table-responsive">
