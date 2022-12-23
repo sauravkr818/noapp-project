@@ -256,7 +256,7 @@ function Dashboard() {
 <div className="d-flex justify-content-center">
                         <h5 className="formbold-form-label formbold-form-label-2">Accepted files</h5>
     <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  (Format)
+  <h5>(Format)</h5>
 </button></div>                     
 <ul>{acceptedFileItems} </ul>
                     </aside>
