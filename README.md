@@ -8,10 +8,16 @@ https://noapp-project.pages.dev/
 
 # no-project
 
-## This project is used to build an admission form for the Yoga Classes.
 
 ### Problem Statement:
+Create a set of APIs using Node(Express) + MongoDB(mongoose) which should implement
+the following features.
 
+- Authentication module using jwt
+- Upload and save contact (csv file) through api in db using service workers.
+
+contacts sample format:
+name, phone, email, linkedin profile url
 
 ## HOSTED WEBSITE - [link](https://noapp-project.pages.dev/)
 
@@ -85,7 +91,7 @@ Header is a component used to show navbar.
 
 ### API ENDPOINTS
 
-## Endpoint - ('/register')
+## Endpoint - ('/signup')
 
 Accepts parameters from the frontend like
 - email
