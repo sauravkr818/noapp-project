@@ -6,8 +6,9 @@ import { useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import SyncLoader from "react-spinners/SyncLoader";
 import { ToastContainer, toast } from "react-toastify";
+import csvFile from "../assets/file.csv";
 import "react-toastify/dist/ReactToastify.css";
-import './style.css';
+import "./style.css";
 
 const baseStyle = {
     flex: 1,
@@ -97,7 +98,7 @@ function Dashboard() {
                                 console.log(error);
                                 setLoadingTable(false);
                             });
-                        
+
                         toast.info(`File Uploaded Succesfully`, {
                             position: "top-right",
                             autoClose: 5000,
@@ -124,8 +125,6 @@ function Dashboard() {
                         });
                         setLoading(false);
                     });
-
-                
             };
             reader.readAsArrayBuffer(file);
         });
@@ -162,7 +161,6 @@ function Dashboard() {
     let count = 1;
 
     useEffect(() => {
-
         let token = localStorage.getItem("token");
         setIsToken(token);
         if (token !== undefined && token !== null) {
@@ -182,13 +180,13 @@ function Dashboard() {
                     }
                 )
                 .then(function (response) {
-                    setTableData([...response.data.data]);setLoadingTable(false);
+                    setTableData([...response.data.data]);
+                    setLoadingTable(false);
                 })
                 .catch(function (error) {
-                    console.log(error);setLoadingTable(false);
+                    console.log(error);
+                    setLoadingTable(false);
                 });
-
-            
 
             var exp = decoded.exp * 1000;
 
@@ -229,8 +227,10 @@ function Dashboard() {
                                 Upload CSV File
                             </label>
 
-
-                            <div {...getRootProps({ style })} className="hoverUpload">
+                            <div
+                                {...getRootProps({ style })}
+                                className="hoverUpload"
+                            >
                                 <input {...getInputProps()} />
                                 <p>
                                     Drag 'n' drop a csv files here, or click to
@@ -239,28 +239,23 @@ function Dashboard() {
                             </div>
                         </div>
                     </div>
-                    {loadingTable ? (
-                        <div className="">
-                            <SyncLoader
-                                color={"#36d7b7"}
-                                loading={true}
-                                size={20}
-                                aria-label="Loading Spinner"
-                                data-testid="loader"
-                            />
-                        </div>
-                    ) : (
-                        <></>
-                    )}
                     <aside>
-<div className="d-flex justify-content-center">
-                        <h5 className="formbold-form-label formbold-form-label-2">Accepted files</h5>
-    <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  <h5>(Format)</h5>
-</button></div>                     
-<ul>{acceptedFileItems} </ul>
+                        <h5 className="formbold-form-label formbold-form-label-2">
+                            Accepted files
+                        </h5>
+                        <div
+                            type="button"
+                            className="btn btn-link p-0"
+                            data-bs-toggle="modal"
+                            data-bs-target="#exampleModal"
+                        >
+                            <h6>(Format)</h6>
+                        </div>
+                        <ul>{acceptedFileItems} </ul>
                     </aside>
-                    <h4 className="mt-5 formbold-form-label formbold-form-label-2">Data: </h4>
+                    <h4 className="mt-5 formbold-form-label formbold-form-label-2">
+                        Data:{" "}
+                    </h4>
                     <div class="table-responsive">
                         <table class="table table-bordered">
                             <thead>
@@ -312,46 +307,70 @@ function Dashboard() {
                     </div>
                 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Format of CSV file</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-< div className="table-responsive">
-        <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">name</th>
-      <th scope="col">email</th>
-      <th scope="col">phone</th>
-      <th scope="col">linkedIn</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-     
-      <td>Mark</td>
-      <td>Mark@gmail.com</td>
-      <td>1234567890</td>
-      <td>https://www.linked.com</td>
-    </tr>
-   
-   
-  </tbody>
-</table>
-</div>
-      </div>
-      <div class="modal-footer">
-<p>Please keep the format as it is shown above</p>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
+                <div
+                    class="modal fade"
+                    id="exampleModal"
+                    tabindex="-1"
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
+                >
+                    <div class="modal-dialog  modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">
+                                    Format of CSV file
+                                </h5>
+                                <button
+                                    type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"
+                                ></button>
+                            </div>
+                            <div class="modal-body">
+                                <div className="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">name</th>
+                                                <th scope="col">email</th>
+                                                <th scope="col">phone</th>
+                                                <th scope="col">linkedIn</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Mark</td>
+                                                <td>Mark@gmail.com</td>
+                                                <td>1234567890</td>
+                                                <td>https://www.linked.com</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <p className="mx-auto">
+                                    Please keep the format as it is shown above
+                                    <a
+                                        className="ms-2"
+                                        href={csvFile}
+                                        download="file.csv"
+                                    >
+                                        sample file
+                                    </a>
+                                </p>
+                                <button
+                                    type="button"
+                                    class="btn btn-secondary"
+                                    data-bs-dismiss="modal"
+                                >
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </>
         );
     } else {
