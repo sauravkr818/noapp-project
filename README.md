@@ -73,13 +73,14 @@ Header is a component used to show navbar.
 ## Backend
 
 ### Packages installed
+![image](https://user-images.githubusercontent.com/71181112/209446510-d5b6bd72-5e95-44a0-9927-3b8e5b1b5722.png)
 
 
 
 ### Project Structure
 
 
-![image](https://user-images.githubusercontent.com/71181112/207114808-92a45eee-338b-4676-b8ef-105596630b51.png)
+![image](https://user-images.githubusercontent.com/71181112/209446483-fd8344b9-c0ec-4eeb-ba6e-16ddff212d59.png)
 
 
 ### API ENDPOINTS
@@ -150,43 +151,7 @@ Accepts paramters like:
 - email
 - CSV file
 
-then the basic validation is done using the function validatePaymentInput() which takes the request body stated above and return if there is an error or not
-Now if there is an error then an error response is send back to the frontend specifying the error.
-
-Now if validation is correct then we will move forward and check whehter the email exists on the database or not.
-
-##### Features:
-- **completePayment() function** - This is the function where approval of payment is done. In this function, there will be a **payment gateway** (ex- razorpay gateway) from which we will confirm whether out payment is done or not. As per the problem statement, I have not implemented this.
-- **Assumptions** - **Payment is always successful**
-- Cases:
-- Case (i) Payment is failed then return as Payment failed
-- Case (ii) If the subscription of the Yoga Classes crosses the month end then set all the fields rellated to the payment of the users to null.
-```
-                        name: user.name,
-                        email: user.email,
-                        phone: user.phone,
-                        payment_done: false,
-                        amount_paid: null,
-                        days_left: 0,
-                        transaction_token: null,
-                        start_date: null,
-                        end_date: null,
-                        batch: null,
-```
-- Case (iii) If someone tries to repay it then it will return with **Payment already Done**.
-- Case (iv) Otherwise set the database such that now the payment is done. After this Payment information is updated in the database.
-```
-                        name: user.name,
-                        email: user.email,
-                        phone: user.phone,
-                        payment_done: payment_done,
-                        amount_paid: amount_paid,
-                        days_left: days_left,
-                        transaction_token: transaction_token,
-                        start_date: start_date,
-                        end_date: end_date,
-                        batch: batch,
-```
+#### the email and the data of csv file is stored in the database.
 
 
 ## Database
@@ -195,17 +160,13 @@ Now if validation is correct then we will move forward and check whehter the ema
 I have hosted my database in the mongoDB cloud.
 There are two collections (tables) in my database:
 - **users**
-- **memberships**
+- **csvUsers**
 
 #### Schema of Users Table
 
 
 ```
 const UserSchema = new Schema({
-  name: {
-    type: String,
-    required: true
-  },
   email: {
     type: String,
     required: true
@@ -214,81 +175,37 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
-  phone: {
-    type: Number,
-    required: true
-  },
-  gender: {
-    type: String,
-    required: true
-  },
-  dob: {
-    type: Date,
-    default: Date.now
-  },
-  date: {
-    type: Date,
-    default: Date.now
-  }
-```
-
-#### Schema of memberships table
+});
 
 ```
-const memberSchema = new Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  email: {
-    type: String,
-    required: true
-  },
-  payment_done: {
-    type: Boolean,
-    default: false,
-  },
-  amount_paid: {
-    type: String,
-    default: null,
-  },
-  transaction_token: {
-    type: String,
-    default: null
-  },
-  start_date: {
-    type: Date,
-    default: null
-  },
-  end_date: {
-    type: Date,
-    default: null
-  },
-  days_left: {
-    type: Number,
-    default: null
-  },
-  phone: {
-    type: Number,
-    required: true
-  },
-  batch: {
-    type: String,
-    default: null
-  }
+
+#### Schema of csvUsers table
+
 ```
-
-## ER Diagram of my database
-
-
-<img width="658" alt="Screenshot_20221213_000522" src="https://user-images.githubusercontent.com/71181112/207162833-0dc6d654-22c7-4b87-b82c-9bd0e44e81e9.png">
-
-
-
-<img width="735" alt="Screenshot_20221213_000812" src="https://user-images.githubusercontent.com/71181112/207162852-875aae52-cac3-4ad3-9e57-fcdd7ae0a111.png">
-
-
-
-
-
-
+const dataSchema = new Schema({
+    name: {
+        type: String,
+        required: true,
+    },
+    email: {
+        type: String,
+        required: true,
+    },
+    phone: {
+        type: String,
+        required: true,
+    },
+    linkedIn:{
+        type: String,
+        required: true,
+    }
+});
+const csvSchema = new Schema({
+    email: {
+        type: String,
+        required: true,
+    },
+    
+    data:[dataSchema]
+});
+```
